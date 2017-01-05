@@ -1,16 +1,6 @@
 #ifndef CyberLib_H
 #define CyberLib_H
 
-#include <avr/interrupt.h>
-#include <avr/io.h>
-#include <avr/eeprom.h>
-#include <avr/wdt.h>
-
-#if defined(ARDUINO) && ARDUINO >= 100
-  #include "Arduino.h"
-#else
-  #include "WProgram.h"
-#endif 
 //work only with my atmega
 #if defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__)
 //**********Small UART****************************
