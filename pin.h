@@ -23,25 +23,13 @@
 #define APIN_4 18
 #define APIN_5 19
 //utils
-#define _lo(x, y, v1, v2) ((x)<(y) ? (v1) : (v2))
-#define _ddr(i) _lo((i), 8, DDRD, _lo((i), 14, DDRB, DDRC))
-#define _port(i) _lo((i), 8, PORTD, _lo((i), 14, PORTB, PORTC))
-#define _pin(i) _lo((i), 8, PIND, _lo((i), 14, PINB, PINC))
-#define _number(i) ((i)-_lo((i), 8, 0, _lo((i), 14, 8, 14)))
-#define _an_pin(i) (B01000000 | (i))
-#define _byte_pos(pos) (B00000001<<(pos))
-#define _byte_inv(pos) (B11111111^(B00000001<<(pos)))
+#define _compare(v1, v2, v3, v4) ((v1)<(v2) ? (v3) : (v4))
+#define _pin(i) ((i)-_lo((i), 8, 0, _lo((i), 14, 8, 14)))
 //set In - Out
-#define setPinIn(i) _ddr((i)) &= _byte_inv(_number((i)))
-#define setPinOut(i) _ddr((i)) |= _byte_pos(_number((i)))
-//set Hi- Low
-#define setPinHi(i) _port((i)) |= _byte_pos(_number((i)))
-#define setPinLow(i) _port((i)) &= _byte_inv(_number((i)))
-//invert
-#define invert(i) _port((i)) ^= _byte_pos(_number((i)))
-//read digit pin status
-#define readPin(i) ((_pin((i)) & _byte_pos(_number((i))))>>_number((i)))
-//read analog pin status
-#define readAPin(i) (AnRead(_an_pin(_number((i)))))
+char setPinIn(char pin);
+char setPinOut(char pin);
+char setPinHi(char pin);
+char setPinLow(char pin);
+
 
 #endif //pin_H
