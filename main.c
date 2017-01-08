@@ -3,9 +3,8 @@
 #include <avr/interrupt.h>
 #include "fifo.h"
 
-#define ATMEGA_CPU 16000000
-#define ATMEGA_BAUD 9600
-#define ATMEGA_UBRR (ATMEGA_CPU/(16*ATMEGA_BAUD))-1
+#define ATMEGA_BAUD 9600UL
+#define ATMEGA_UBRR (F_CPU/(16UL*ATMEGA_BAUD))-1
 
 FIFO( 64 ) uart_tx_fifo;
 FIFO( 64 ) uart_rx_fifo;
@@ -34,7 +33,7 @@ void uart_init(unsigned int ubrr)
   */
   UCSR0B = (1 << RXCIE0)
          | (1 << TXCIE0)
-         | (1 << UDRIE0)
+         | (0 << UDRIE0)
          | (1 << TXEN0)
          | (1 << RXEN0);
   /*
